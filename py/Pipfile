@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+#verify_ssl = true
+name = "pypi"
+
+[packages]
+#flask = "*"
+pykakasi = "*"
+python_dotenv = "*"
+uvicorn = "*"
+fastapi = "*"
+
+
+[requires]
+python_version = "3.9"
