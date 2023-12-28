@@ -21,11 +21,19 @@ class MyParser extends Kuroshiro.default {
 
     async convert(str) {
         const rawTokens = await this._analyzer.parse(str);
+        // console.log("rawTokens", rawTokens)
         const tokens = patchTokens(rawTokens);
+        // console.log("tokens", tokens)
         // return tokens
         // else if (options.mode === "okurigana" || options.mode === "furigana") {
         const notations = []; // [basic, basic_type[1=kanji,2=kana,3=others], notation, pronunciation]
         for (let i = 0; i < tokens.length; i++) {
+            /**
+              if (hasKJ && hasHK) return 1;
+              if (hasKJ) return 0;
+              if (hasHK) return 2;
+              return 3;
+            */
             const strType = getStrType(tokens[i].surface_form);
             switch (strType) {
                 case 0:
@@ -66,7 +74,7 @@ class MyParser extends Kuroshiro.default {
                         notations.push([tokens[i].surface_form, 1, toRawHiragana(tokens[i].reading), tokens[i].pronunciation || tokens[i].reading]);
                     }
                     break;
-                case 2:
+                case 2: // hasHK
                     for (let c2 = 0; c2 < tokens[i].surface_form.length; c2++) {
                         notations.push([tokens[i].surface_form[c2], 2, toRawHiragana(tokens[i].reading[c2]), (tokens[i].pronunciation && tokens[i].pronunciation[c2]) || tokens[i].reading[c2]]);
                     }

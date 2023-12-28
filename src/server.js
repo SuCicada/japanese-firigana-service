@@ -1,5 +1,6 @@
 const express = require('express');
 const KuromojiAnalyzer = require("kuroshiro-analyzer-kuromoji");
+const YahooWebAnalyzer = require("./kuroshiro-analyzer-yahoo-webapi");
 const cors = require("cors");
 const {MyParser} = require("./parser");
 require('dotenv').config();
@@ -10,7 +11,9 @@ app.use(express.json());
 let parser = new MyParser();
 
 async function init() {
-    await parser.init(new KuromojiAnalyzer());
+    await parser.init(new YahooWebAnalyzer({
+        appId: process.env.YAHOO_APP_ID,
+    }));
 }
 
 app.post('/convert/', async (req, res) => {

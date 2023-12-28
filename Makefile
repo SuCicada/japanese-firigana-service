@@ -9,9 +9,9 @@ run:
 	#python main.py
 	node src/server.js
 
-remote_docker := docker
+remote_docker := unset DOCKER_HOST; docker
 ifeq ($(REMOTE),true)
-	remote_docker := DOCKER_HOST=$(DOCKER_HOST) docker
+	remote_docker := DOCKER_HOST=$(REMOTE_DOCKER_HOST) docker
 endif
 
 docker-build:
@@ -25,6 +25,7 @@ _docker-run: docker-build
 	$(remote_docker) stop $(service_name) || true
 	$(remote_docker) rm $(service_name) || true
 	$(remote_docker) run -d -p 41401:41401 --name $(service_name) \
+		--env-file .env \
 		sucicada/$(service_name):latest
 
 docker-run-remote:
@@ -43,3 +44,5 @@ docker-push:
 #install-extensions:
 #	cat extensions.txt | xargs -L 1 code --install-extension
 #
+test:
+	/opt/homebrew/bin/docker build -t sucicada/japanese-firigana-service:latest .
