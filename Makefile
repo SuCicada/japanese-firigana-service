@@ -26,6 +26,7 @@ _docker-run: docker-build
 	$(remote_docker) rm $(service_name) || true
 	$(remote_docker) run -d -p 41401:41401 --name $(service_name) \
 		--env-file .env \
+		--restart=always \
 		sucicada/$(service_name):latest
 
 docker-run-remote:

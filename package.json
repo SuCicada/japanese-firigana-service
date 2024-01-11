@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "run": "node src/server.js"
+  },
   "dependencies": {
     "axios": "^1.6.3",
     "cors": "^2.8.5",

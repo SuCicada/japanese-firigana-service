@@ -45,6 +45,9 @@ class Analyzer {
      * @returns {Promise} Promise object represents the result of parsing
      */
     parse(str = "") {
+        str = str.trim();
+        if (!str) return Promise.resolve([]);
+
         const self = this;
         return new Promise((resolve, reject) => {
             // const paramJson = {
@@ -72,7 +75,7 @@ class Analyzer {
                 // timeout: self._timeout
             })
                 .then((res) => {
-                    // console.log(res.data.result)
+                    console.log(`request: ${str}`)
                     // let data = JSON.parse()
                     let data = res.data.result;
                     let tokens = this.transformToKuroshiroTokens(data)
@@ -108,6 +111,12 @@ class Analyzer {
 
     transformToKuroshiroTokens(data) {
         let res = []
+
+        if (!data || !data.word) {
+            console.log(data)
+            return
+        }
+
         data.word.forEach((word) => {
             if (word.subword) {
                 word.subword.forEach((subword) => {
