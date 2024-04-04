@@ -9,3 +9,6 @@ gen
 /.git
 /.vercel
 /node_modules
+server.crt
+server.csr
+server.key

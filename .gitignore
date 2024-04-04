@@ -9,3 +9,7 @@ gen
 .env
 node_modules
 package-lock.json
+server.crt
+server.csr
+server.key
+out.txt
