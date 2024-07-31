@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "run": "node src/server.js"
+    "run": "node src/server.js",
+    "build": "webpack"
   },
   "dependencies": {
     "axios": "^1.6.3",
@@ -12,5 +13,9 @@
     "kuroshiro-analyzer-kuromoji": "^1.1.0",
     "kuroshiro-analyzer-mecab": "^1.0.1",
     "kuroshiro-analyzer-yahoo-webapi": "^1.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
   }
 }
